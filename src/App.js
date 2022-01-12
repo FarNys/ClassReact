@@ -1,25 +1,76 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Single from "./Single";
+import "./style.css";
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allItems: [],
+      currItem: {
+        txt: "",
+        key: "",
+      },
+    };
+    //SOMETIMES CANT RECOGNIZE THIS (MAYBE WHEN WE PROPS TO LOWER COMPONENTS!)
+    this.deleteItem = this.deleteItem.bind(this);
+    //TOP ACTION WILL FIX THAT!
+  }
+  changeInput(el) {
+    this.setState({
+      currItem: {
+        txt: el,
+        key: Date.now(),
+      },
+    });
+    // console.log(this.state.currItem);
+  }
+  addItem(e) {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      allItems: [...this.state.allItems, this.state.currItem],
+      currItem: {
+        txt: "",
+        key: "",
+      },
+    });
+    console.log(this.state);
+  }
+  deleteItem(id) {
+    this.setState({
+      ...this.state,
+      allItems: [...this.state.allItems.filter((el) => el.key !== id)],
+    });
+    console.log(this.state);
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+  render() {
+    return (
+      <div className="app_container">
+        <h1>This is App</h1>
+        <div
+          className="form_container"
+          style={{ display: "flex", flexDirection: "column" }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <h3>ToDo</h3>
+          <div style={{ display: "flex" }}>
+            <input
+              type="text"
+              placeholder="Add here . . ."
+              value={this.state.currItem.txt}
+              onChange={(e) => this.changeInput(e.target.value)}
+            />
+            <button onClick={(e) => this.addItem(e)}>ADD</button>
+          </div>
+          {this.state.allItems.length > 0 && (
+            <div className="all">
+              {this.state.allItems.map((el) => (
+                <Single key={el.key} el={el} deleteItem={this.deleteItem} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 }
-
-export default App;
