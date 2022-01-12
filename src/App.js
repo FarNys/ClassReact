@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FetchData from "./FetchData";
 import Single from "./Single";
 import "./style.css";
 export default class App extends Component {
@@ -6,6 +7,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       allItems: [],
+      checkUnmount: true,
       currItem: {
         txt: "",
         key: "",
@@ -34,20 +36,28 @@ export default class App extends Component {
         key: "",
       },
     });
-    console.log(this.state);
+    // console.log(this.state);
   }
   deleteItem(id) {
     this.setState({
       ...this.state,
       allItems: [...this.state.allItems.filter((el) => el.key !== id)],
     });
-    console.log(this.state);
+    // console.log(this.state);
+  }
+  unmountComp() {
+    this.setState({
+      ...this.state,
+      checkUnmount: !this.state.checkUnmount,
+    });
+    // console.log(this.state.checkUnmount);
   }
 
   render() {
     return (
       <div className="app_container">
         <h1>This is App</h1>
+        <button onClick={() => this.unmountComp()}>Unmount</button>
         <div
           className="form_container"
           style={{ display: "flex", flexDirection: "column" }}
@@ -70,6 +80,7 @@ export default class App extends Component {
             </div>
           )}
         </div>
+        {this.state.checkUnmount ? <FetchData /> : null}
       </div>
     );
   }
