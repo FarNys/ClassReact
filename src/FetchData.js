@@ -8,6 +8,7 @@ export default class FetchData extends Component {
       num: 0,
     };
   }
+
   check() {
     this.setState({ ...this.state, num: +this.state.num + 5 });
     console.log(this.state.num);
@@ -26,7 +27,7 @@ export default class FetchData extends Component {
         }
       );
       const data = await res.json();
-      this.setState({ ...this.state, dataBack: data.data });
+      this.setState({ ...this.state, dataBack: data.data.splice(0, 5) });
       console.log(this.state);
     };
 
@@ -38,7 +39,7 @@ export default class FetchData extends Component {
   //   }
 
   componentWillUnmount() {
-    alert("hi all");
+    console.log("will unmount");
   }
 
   render() {

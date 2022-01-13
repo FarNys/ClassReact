@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import FetchData from "./FetchData";
 import Single from "./Single";
 import "./style.css";
+import AddCount from "./AddCount";
+import ShowCount from "./ShowCount";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +82,9 @@ export default class App extends Component {
             </div>
           )}
         </div>
-        {this.state.checkUnmount ? <FetchData /> : null}
+        {/* {this.state.checkUnmount ? <FetchData /> : null} */}
+        <AddCount />
+        <ShowCount />
       </div>
     );
   }
