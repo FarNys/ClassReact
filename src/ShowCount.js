@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 class ShowCount extends Component {
   render() {
-    return <div>This is Show Count {this.props.numItem}</div>;
+    const { numItem } = this.props;
+    return <div>This is Show Count {numItem}</div>;
   }
 }
 

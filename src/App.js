@@ -4,6 +4,7 @@ import Single from "./Single";
 import "./style.css";
 import AddCount from "./AddCount";
 import ShowCount from "./ShowCount";
+import GridContainer from "./GridContainer";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -85,6 +86,7 @@ export default class App extends Component {
         {/* {this.state.checkUnmount ? <FetchData /> : null} */}
         <AddCount />
         <ShowCount />
+        <GridContainer />
       </div>
     );
   }
